@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  labels:
+    app: app1
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: app1
+  template:
+    metadata:
+      name: app1
+      labels:
+        app: app1
+    spec:
+      containers:
+      - name: app1
+        image: registry.k8s.io/hpa-example
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+            memory: 8Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1
+  labels:
+    app: app1
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: app1

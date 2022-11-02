@@ -1,0 +1,14 @@
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  name: "restrictive-resource-limits" 
+spec:
+  limits:
+    -
+      type: "Container"
+      max:
+        memory: "20Mi"
+        cpu: "1" 
+      min:
+        memory: "10Mi"
+        cpu: "1m"
